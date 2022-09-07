@@ -16,5 +16,9 @@ RUN python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade
 RUN pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip3 install -r requirements.txt
 
+RUN sed -i 's/https:\/\/cdn.jsdelivr.net\/npm\/swagger-ui-dist@4\/swagger-ui-bundle.js/\/static\/swagger-ui\/swagger-ui-bundle.js/g' /usr/local/lib/python3.7/site-packages/fastapi/openapi/docs.py
+RUN sed -i 's/https:\/\/cdn.jsdelivr.net\/npm\/swagger-ui-dist@4\/swagger-ui.css/\/static\/swagger-ui\/swagger-ui.css/g' /usr/local/lib/python3.7/site-packages/fastapi/openapi/docs.py
+RUN sed -i 's/https:\/\/fastapi.tiangolo.com\/img\/favicon.png/\/static\/swagger-ui\/favicon-32x32.png/g' /usr/local/lib/python3.7/site-packages/fastapi/openapi/docs.py
+
 # CMD ["python3", "./main.py"]
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
